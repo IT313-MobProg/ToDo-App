@@ -43,6 +43,14 @@ export default function App() {
     setEditTask(taskItems[index]);
   };
 
+  const handleEdit = (index) => {
+    startEditing(index);
+  };
+
+  const handleDelete = (index) => {
+    completeTask(index);
+  };
+
   if (!fontsLoaded) {
     return <AppLoading />;
   }
@@ -53,9 +61,12 @@ export default function App() {
         <Text style={styles.sectionTitle}>All Tasks</Text>
         <View style={styles.items}>
           {taskItems.map((item, index) => (
-            <TouchableOpacity key={index} onPress={() => completeTask(index)}>
-              <Task text={item} onEdit={() => startEditing(index)} />
-            </TouchableOpacity>
+            <Task 
+              key={index} 
+              text={item} 
+              onEdit={() => handleEdit(index)} 
+              onDelete={() => handleDelete(index)} 
+            />
           ))}
         </View>
       </View>
