@@ -20,27 +20,27 @@ export default function App() {
     Keyboard.dismiss();
     if (isEditing && editIndex !== null) {
       let itemsCopy = [...taskItems];
-      itemsCopy[editIndex] = editTask;
+      itemsCopy[editIndex] = { text: editTask, completed: false };
       setTaskItems(itemsCopy);
       setIsEditing(false);
       setEditIndex(null);
       setEditTask('');
     } else if (task) {
-      setTaskItems([...taskItems, task]);
+      setTaskItems([...taskItems, { text: task, completed: false }]);
       setTask('');
     }
   };
 
   const completeTask = (index) => {
     let itemsCopy = [...taskItems];
-    itemsCopy.splice(index, 1);
+    itemsCopy[index].completed = !itemsCopy[index].completed;
     setTaskItems(itemsCopy);
   };
 
   const startEditing = (index) => {
     setIsEditing(true);
     setEditIndex(index);
-    setEditTask(taskItems[index]);
+    setEditTask(taskItems[index].text);
   };
 
   const handleEdit = (index) => {
@@ -48,7 +48,9 @@ export default function App() {
   };
 
   const handleDelete = (index) => {
-    completeTask(index);
+    let itemsCopy = [...taskItems];
+    itemsCopy.splice(index, 1);
+    setTaskItems(itemsCopy);
   };
 
   if (!fontsLoaded) {
@@ -63,7 +65,9 @@ export default function App() {
           {taskItems.map((item, index) => (
             <Task 
               key={index} 
-              text={item} 
+              text={item.text} 
+              completed={item.completed}
+              onToggleComplete={() => completeTask(index)} 
               onEdit={() => handleEdit(index)} 
               onDelete={() => handleDelete(index)} 
             />

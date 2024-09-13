@@ -1,20 +1,22 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { AntDesign } from '@expo/vector-icons'; // Importing icons from react-native-vector-icons
+import { AntDesign } from '@expo/vector-icons'; // For using icons
 
-const Task = ({ text, onEdit, onDelete }) => {
+const Task = ({ text, onEdit, onDelete, onToggleComplete, completed }) => {
   return (
     <View style={styles.item}>
-      <View style={styles.itemLeft}>
-        <View style={styles.square}></View>
-        <Text style={styles.itemText}>{text}</Text>
-      </View>
+      <TouchableOpacity onPress={onToggleComplete} style={styles.itemLeft}>
+        <View style={[styles.square, completed && styles.squareCompleted]}>
+          {completed && <AntDesign name="check" size={16} color="#EFD6AC" />}
+        </View>
+        <Text style={[styles.itemText, completed && styles.itemTextCompleted]}>{text}</Text>
+      </TouchableOpacity>
       <View style={styles.buttons}>
-        <TouchableOpacity onPress={onEdit}>
-          <AntDesign name="edit" size={18} color="#EFD6AC" />
+        <TouchableOpacity onPress={onEdit} style={styles.editButton}>
+          <AntDesign name="edit" size={24} color="#EFD6AC" />
         </TouchableOpacity>
         <TouchableOpacity onPress={onDelete} style={styles.deleteButton}>
-          <AntDesign name="delete" size={18} color="#EFD6AC" />
+          <AntDesign name="delete" size={24} color="#EFD6AC" />
         </TouchableOpacity>
       </View>
     </View>
@@ -42,16 +44,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#EFD6AC',
     opacity: 0.7,
     borderRadius: 5,
-    marginRight: 15
+    marginRight: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  squareCompleted: {
+    backgroundColor: '#5c5c5c', // Change color for completed state
   },
   itemText: {
-    maxWidth: '90%',
+    maxWidth: '80%',
     color: '#EFD6AC',
     fontFamily: 'Poppins-Regular'
+  },
+  itemTextCompleted: {
+    textDecorationLine: 'line-through',
+    color: '#a5a5a5' // Change text color for completed state
   },
   buttons: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  editButton: {
+    marginRight: 15
   },
   deleteButton: {
     marginLeft: 15
