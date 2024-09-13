@@ -1,69 +1,82 @@
 import { StatusBar } from 'expo-status-bar';
-import React , {useState} from 'react';
+import React, { useState } from 'react';
 import { KeyboardAvoidingView, StyleSheet, Text, View, TextInput, Platform, TouchableOpacity, Keyboard } from 'react-native';
 import Task from './components/Task';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
-
 
 export default function App() {
   let [fontsLoaded] = useFonts({
     'Poppins-Regular': require('./assets/fonts/Poppins/Poppins-Regular.ttf')
   });
 
-  if (!fontsLoaded) {
-    return <AppLoading />;
-  }
-  
-  const [task, setTask] = useState();
+  const [task, setTask] = useState('');
   const [taskItems, setTaskItems] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editIndex, setEditIndex] = useState(null);
+  const [editTask, setEditTask] = useState('');
 
   const handleAddTask = () => {
     Keyboard.dismiss();
-    setTaskItems([...taskItems, task])
-    setTask(null);
-  }
+    if (isEditing && editIndex !== null) {
+      let itemsCopy = [...taskItems];
+      itemsCopy[editIndex] = editTask;
+      setTaskItems(itemsCopy);
+      setIsEditing(false);
+      setEditIndex(null);
+      setEditTask('');
+    } else if (task) {
+      setTaskItems([...taskItems, task]);
+      setTask('');
+    }
+  };
+
   const completeTask = (index) => {
     let itemsCopy = [...taskItems];
-    itemsCopy.splice(index,  1);
+    itemsCopy.splice(index, 1);
     setTaskItems(itemsCopy);
+  };
+
+  const startEditing = (index) => {
+    setIsEditing(true);
+    setEditIndex(index);
+    setEditTask(taskItems[index]);
+  };
+
+  if (!fontsLoaded) {
+    return <AppLoading />;
   }
+
   return (
     <View style={styles.container}>
       <View style={styles.tasksWrapper}>
-
         <Text style={styles.sectionTitle}>All Tasks</Text>
-        {/* <Text style={{ fontFamily: 'Poppins-Regular', fontSize: 24, fontWeight: 'bold', color: '#EFD6AC' }}>
-            All Tasks
-        </Text>  */}
         <View style={styles.items}>
-          {
-            taskItems.map((item, index) => {
-              return (
-                <TouchableOpacity key={index} onPress={() => completeTask(index)}>
-                  <Task  text={item} />
-                </TouchableOpacity>
-              ) 
-            })
-          }
+          {taskItems.map((item, index) => (
+            <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+              <Task text={item} onEdit={() => startEditing(index)} />
+            </TouchableOpacity>
+          ))}
         </View>
-        
       </View>
 
       <KeyboardAvoidingView 
         behavior={Platform.OS === "ios" ? "padding" : "height"} 
         style={styles.writeTaskWrapper}
       >
-
-        <TextInput style={styles.input} placeholder={'Enter a task'} placeholderTextColor="#ffffff4d" value={task} onChangeText={text => setTask(text)}/>
-
+        <TextInput
+          style={styles.input}
+          placeholder={'Enter a task'}
+          placeholderTextColor="#ffffff4d"
+          value={isEditing ? editTask : task}
+          onChangeText={text => isEditing ? setEditTask(text) : setTask(text)}
+        />
         <TouchableOpacity onPress={() => handleAddTask()}>
           <View style={styles.addWrapper}>
-            <Text style={styles.addText}>+</Text>
+            <Text style={styles.addText}>{isEditing ? 'Update' : '+'}</Text>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-
     </View>
   );
 }
@@ -104,9 +117,7 @@ const styles = StyleSheet.create({
     borderColor: '#183A37',
     borderWidth: 1,
     fontFamily: 'Poppins-Regular'
-    // marginTop: 15,        
-    // marginBottom: 30     
-},
+  },
   addWrapper: {
     width: 60,
     height: 60,
