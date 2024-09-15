@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { AntDesign } from '@expo/vector-icons'; // For using icons
+import { AntDesign } from '@expo/vector-icons';
 
 const Task = ({ text, onEdit, onDelete, onToggleComplete, completed }) => {
   return (
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   squareCompleted: {
-    backgroundColor: '#5c5c5c', // Change color for completed state
+    backgroundColor: '#5c5c5c',
   },
   itemText: {
     maxWidth: '80%',
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   },
   itemTextCompleted: {
     textDecorationLine: 'line-through',
-    color: '#a5a5a5' // Change text color for completed state
+    color: '#a5a5a5'
   },
   buttons: {
     flexDirection: 'row',
