@@ -25,7 +25,7 @@ const Task = ({ text, onEdit, onDelete, onToggleComplete, completed }) => {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: '#183A37',
+    backgroundColor: '#795757', //less darker //#183A37
     padding: 15,
     borderRadius: 10,
     flexDirection: 'row',
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   square: {
     width: 24,
     height: 24,
-    backgroundColor: '#EFD6AC',
+    backgroundColor: '#3B3030', //mura siyag beige //#EFD6AC
     opacity: 0.7,
     borderRadius: 5,
     marginRight: 15,
@@ -49,16 +49,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   squareCompleted: {
-    backgroundColor: '#5c5c5c',
+    backgroundColor: '#5c5c5c', //katong gray //#5c5c5c
   },
   itemText: {
     maxWidth: '80%',
-    color: '#EFD6AC',
+    color: '#FFF0D1', //mura siyag beige //#EFD6AC
     fontFamily: 'Poppins-Regular'
   },
   itemTextCompleted: {
     textDecorationLine: 'line-through',
-    color: '#a5a5a5'
+    color: '#a5a5a5' //lighter gray pag completed nang task //#a5a5a5
   },
   buttons: {
     flexDirection: 'row',

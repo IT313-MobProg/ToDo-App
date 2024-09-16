@@ -82,7 +82,7 @@ export default function App() {
         <TextInput
           style={styles.input}
           placeholder={'Enter a task'}
-          placeholderTextColor="#ffffff4d"
+          placeholderTextColor="#3B3030" //#ffffff4d //#3B3030
           value={isEditing ? editTask : task}
           onChangeText={text => isEditing ? setEditTask(text) : setTask(text)}
         />
@@ -99,14 +99,14 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#04151F',
+    backgroundColor: '#FFF0D1', //darkest //#04151F //#FFF0D1
   },
   tasksWrapper: {
     paddingTop: 80,
     paddingHorizontal: 20,
   },
   sectionTitle: {
-    color: '#EFD6AC',
+    color: '#3B3030', //mura siyag beige //#EFD6AC //#3B3030
     fontSize: 24,
     fontWeight: 'bold',
     fontFamily: 'Poppins-Regular',
@@ -123,28 +123,28 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
-    color: '#EFD6AC',
-    paddingVertical: 15,
+    color: '#3B3030', //mura siyag beige //#EFD6AC //#3B3030
+    paddingVertical: 15, 
     paddingHorizontal: 15,
     width: 250,
-    borderRadius: 60,
-    backgroundColor: '#04151F',
-    borderColor: '#183A37',
-    borderWidth: 1,
-    fontFamily: 'Poppins-Regular'
+    borderRadius: 60, 
+    backgroundColor: '#FFF0D1', //darkest //#04151F //#FFF0D1
+    borderColor: '#795757', //less darker //#183A37 //#795757
+    borderWidth: 2,
+    fontFamily: 'Poppins-Regular',
   },
   addWrapper: {
     width: 60,
     height: 60,
-    backgroundColor: '#183A37',
+    backgroundColor: '#795757', //less darker //#183A37 //#795757
     borderRadius: 60,
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#04151F'
+    borderWidth: 1, 
+    borderColor: '#FFF0D1' //darkest //#04151F //#FFF0D1
   },
   addText:{
-    color: '#EFD6AC',
+    color: '#FFF0D1', //mura siyag beige //#EFD6AC //#FFF0D1
     fontFamily: 'Poppins-Regular'
   },
 });
