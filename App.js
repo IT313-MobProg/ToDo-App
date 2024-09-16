@@ -82,7 +82,7 @@ export default function App() {
         <TextInput
           style={styles.input}
           placeholder={'Enter a task'}
-          placeholderTextColor="#3B3030" //#ffffff4d //#3B3030
+          placeholderTextColor="#d6d6d6" //#ffffff4d //#3B3030
           value={isEditing ? editTask : task}
           onChangeText={text => isEditing ? setEditTask(text) : setTask(text)}
         />
@@ -99,17 +99,18 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF0D1', //darkest //#04151F //#FFF0D1
+    backgroundColor: '#121212', //darkest //#04151F //#FFF0D1
   },
   tasksWrapper: {
     paddingTop: 80,
     paddingHorizontal: 20,
   },
   sectionTitle: {
-    color: '#3B3030', //mura siyag beige //#EFD6AC //#3B3030
+    color: '#FFFFFF', //mura siyag beige //#EFD6AC //#3B3030
     fontSize: 24,
     fontWeight: 'bold',
     fontFamily: 'Poppins-Regular',
+    opacity: 0.87
   },
   items: {
     marginTop: 30
@@ -123,12 +124,13 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   input: {
-    color: '#3B3030', //mura siyag beige //#EFD6AC //#3B3030
+    color: '#FFFFFF', //mura siyag beige //#EFD6AC //#3B3030
+    opacity: 0.87,
     paddingVertical: 15, 
     paddingHorizontal: 15,
     width: 250,
     borderRadius: 60, 
-    backgroundColor: '#FFF0D1', //darkest //#04151F //#FFF0D1
+    backgroundColor: '#121212', //darkest //#04151F //#FFF0D1
     borderColor: '#795757', //less darker //#183A37 //#795757
     borderWidth: 2,
     fontFamily: 'Poppins-Regular',
@@ -141,10 +143,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1, 
-    borderColor: '#FFF0D1' //darkest //#04151F //#FFF0D1
+    // borderColor: '#FFF0D1' //darkest //#04151F //#FFF0D1
   },
   addText:{
-    color: '#FFF0D1', //mura siyag beige //#EFD6AC //#FFF0D1
+    color: '#FFFFFF', //mura siyag beige //#EFD6AC //#FFF0D1
+    opacity: 0.87,
     fontFamily: 'Poppins-Regular'
   },
 });
